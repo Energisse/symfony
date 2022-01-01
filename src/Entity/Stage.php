@@ -35,19 +35,19 @@ class Stage
     private $emailContact;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="listeStage")
+     * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="stages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $codeEntreprise;
+    private $entrepriseCode;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="listeStage")
+     * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="stages")
      */
-    private $ormation;
+    private $formations;
 
     public function __construct()
     {
-        $this->ormation = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -91,14 +91,14 @@ class Stage
         return $this;
     }
 
-    public function getCodeEntreprise(): ?Entreprise
+    public function getEntrepriseCode(): ?Entreprise
     {
-        return $this->codeEntreprise;
+        return $this->entrepriseCode;
     }
 
-    public function setCodeEntreprise(?Entreprise $codeEntreprise): self
+    public function setEntrepriseCode(?Entreprise $entrepriseCode): self
     {
-        $this->codeEntreprise = $codeEntreprise;
+        $this->entrepriseCode = $entrepriseCode;
 
         return $this;
     }
@@ -106,23 +106,23 @@ class Stage
     /**
      * @return Collection|Formation[]
      */
-    public function getOrmation(): Collection
+    public function getFormations(): Collection
     {
-        return $this->ormation;
+        return $this->formations;
     }
 
-    public function addOrmation(Formation $ormation): self
+    public function addformations(Formation $formations): self
     {
-        if (!$this->ormation->contains($ormation)) {
-            $this->ormation[] = $ormation;
+        if (!$this->formations->contains($formations)) {
+            $this->formations[] = $formations;
         }
 
         return $this;
     }
 
-    public function removeOrmation(Formation $ormation): self
+    public function removeformations(Formation $formations): self
     {
-        $this->ormation->removeElement($ormation);
+        $this->formations->removeElement($formations);
 
         return $this;
     }

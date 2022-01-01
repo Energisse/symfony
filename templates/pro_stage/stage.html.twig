@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProStageController!{% endblock %}
+{% block title %}Stage {% endblock %}
 
 {% block body %}
 <style>
@@ -9,10 +9,10 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Bienvenue sur la page d'accueil de Prostages</h1>
-    <div id="filtre">
-        <a href="{{path('entreprises')}}">Filtrer par entreprises</a>
-        <a href="{{path('formations')}}">Filtrer par formations</a>
-    </div>
+  <p>{{stage.titre}}</p>
+  <p>{{stage.descMissions}}</p>
+  <p>{{stage.emailContact}}</p>
+
+    
 </div>
 {% endblock %}

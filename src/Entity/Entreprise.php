@@ -40,13 +40,13 @@ class Entreprise
     private $URLsite;
 
     /**
-     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="codeEntreprise")
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="entrepriseCode")
      */
-    private $listeStage;
+    private $stages;
 
     public function __construct()
     {
-        $this->listeStage = new ArrayCollection();
+        $this->stages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,27 +105,27 @@ class Entreprise
     /**
      * @return Collection|Stage[]
      */
-    public function getListeStage(): Collection
+    public function getStages(): Collection
     {
-        return $this->listeStage;
+        return $this->stages;
     }
 
-    public function addListeStage(Stage $listeStage): self
+    public function addStage(Stage $stage): self
     {
-        if (!$this->listeStage->contains($listeStage)) {
-            $this->listeStage[] = $listeStage;
-            $listeStage->setCodeEntreprise($this);
+        if (!$this->stages->contains($stage)) {
+            $this->stages[] = $stage;
+            $stage->setEntrepriseCode($this);
         }
 
         return $this;
     }
 
-    public function removeListeStage(Stage $listeStage): self
+    public function removeStage(Stage $stage): self
     {
-        if ($this->listeStage->removeElement($listeStage)) {
+        if ($this->stages->removeElement($stage)) {
             // set the owning side to null (unless already changed)
-            if ($listeStage->getCodeEntreprise() === $this) {
-                $listeStage->setCodeEntreprise(null);
+            if ($stage->getEntrepriseCode() === $this) {
+                $stage->setEntrepriseCode(null);
             }
         }
 

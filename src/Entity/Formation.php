@@ -30,13 +30,13 @@ class Formation
     private $nomCourt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Stage::class, mappedBy="ormation")
+     * @ORM\ManyToMany(targetEntity=Stage::class, mappedBy="formations")
      */
-    private $listeStage;
+    private $stages;
 
     public function __construct()
     {
-        $this->listeStage = new ArrayCollection();
+        $this->stages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,25 +71,25 @@ class Formation
     /**
      * @return Collection|Stage[]
      */
-    public function getListeStage(): Collection
+    public function getStages(): Collection
     {
-        return $this->listeStage;
+        return $this->stages;
     }
 
-    public function addListeStage(Stage $listeStage): self
+    public function addStage(Stage $stage): self
     {
-        if (!$this->listeStage->contains($listeStage)) {
-            $this->listeStage[] = $listeStage;
-            $listeStage->addOrmation($this);
+        if (!$this->stages->contains($stage)) {
+            $this->stages[] = $stage;
+            $stage->addFormations($this);
         }
 
         return $this;
     }
 
-    public function removeListeStage(Stage $listeStage): self
+    public function removeStage(Stage $stage): self
     {
-        if ($this->listeStage->removeElement($listeStage)) {
-            $listeStage->removeOrmation($this);
+        if ($this->stages->removeElement($stage)) {
+            $stage->removeFormations($this);
         }
 
         return $this;

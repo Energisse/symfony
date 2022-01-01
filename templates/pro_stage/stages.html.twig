@@ -8,11 +8,32 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Stage {{id}}</h1>
-    <div id="filtre">
-        <a href="entreprises">Filtrer par entreprises</a>
-        <a href="formations">Filtrer par formations</a>
-    </div>
+<div class="md-12">
+
 </div>
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set numero = 1 %}
+        {% for stage in stages %}
+        
+        <tr>
+            <th scope="row">{{numero}}</th>
+            <td><a href="{{path("stage",{id:stage.id})}}">{{ stage.titre }}</a></td>
+            <td>{{ stage.descMissions }}</td>
+            <td>{{ stage.emailContact }}</td>
+        </tr>
+  
+        {% set numero = numero + 1 %}
+        
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

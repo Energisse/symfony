@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<h1>Formations</h1>
+
+{% set numero = 1 %}
+
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom long</th>
+        <th scope="col">Nom court</th>
+        <th scope="col">Stages</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for formation in formations %}
+        
+        <tr>
+            <th scope="row">{{numero}}</th>
+            <td>{{ formation.nomLong }}</td>
+            <td>{{ formation.nomCourt }}</td>
+            <td>
+                {% if formation.stages | length == 1 %}
+                    <a href="{{ path('stages-formation', {id: formation.id}) }}">voire le stage</a>
+                {% endif %}
+                {% if formation.stages | length > 1 %}
+                    <a href="{{ path('stages-formation', {id: formation.id}) }}">voire les {{ formation.stages | length }} stages</a>
+                {% endif %}
+             
+            </td>
+        </tr>
+  
+        {% set numero = numero + 1 %}
+        
+        {% endfor %}
+    </tbody>
+</table>
+   
+
+{% endblock %}

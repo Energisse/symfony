@@ -1,1 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprises{% endblock %}
+
+{% block body %}
 <h1>Entreprises</h1>
+
+{% set numero = 1 %}
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Activite</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Site</th>
+        <th scope="col">Stages</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entreprise in entreprises %}
+        
+        <tr>
+            <th scope="row">{{numero}}</th>
+            <td>{{ entreprise.nom }}</td>
+            <td>{{ entreprise.activite }}</td>
+            <td>{{ entreprise.adresse }}</td>
+            <td><a href={{ entreprise.URLsite }}>{{ entreprise.URLsite }}</a></td>
+            <td>
+               
+                {% if entreprise.stages | length == 1 %}
+                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voire le stage</a>
+                {% endif %}
+                {% if entreprise.stages | length > 1 %}
+                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voire les {{ entreprise.stages | length }} stages</a>
+                {% endif %}
+             
+            </td>
+        </tr>
+  
+        {% set numero = numero + 1 %}
+        
+        {% endfor %}
+    </tbody>
+</table>
+   
+
+{% endblock %}
