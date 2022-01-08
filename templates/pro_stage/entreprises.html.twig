@@ -29,10 +29,10 @@
             <td>
                
                 {% if entreprise.stages | length == 1 %}
-                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voire le stage</a>
+                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voir le stage</a>
                 {% endif %}
                 {% if entreprise.stages | length > 1 %}
-                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voire les {{ entreprise.stages | length }} stages</a>
+                    <a href="{{ path('stages-entreprise', {id: entreprise.id}) }}">voir les {{ entreprise.stages | length }} stages</a>
                 {% endif %}
              
             </td>

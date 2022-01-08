@@ -1,16 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprises{% endblock %}
+{% block title %}Formation{% endblock %}
 
 {% block body %}
-<h1>Liste des stage de la formation {{formation.nomCourt}}</h1>
 
-{% set numero = 1 %}
-<table class="table">
-    {% for stage in formation.stages %}
-        {{stage.descMissions}}
-    {% endfor %}
-</table>
-   
+{% include 'stages.html.twig' with {'stages': formation.stages,'titre' : "Liste des stages de la formation : "~formation.nomCourt} %}
 
 {% endblock %}

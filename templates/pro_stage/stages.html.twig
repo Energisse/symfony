@@ -1,39 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Stage {% endblock %}
+{% block title %}Stages{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="md-12">
+{% include 'stages.html.twig' with {'stages': stages} %}
 
-</div>
-<table class="table">
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Titre</th>
-        <th scope="col">Description</th>
-        <th scope="col">Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% set numero = 1 %}
-        {% for stage in stages %}
-        
-        <tr>
-            <th scope="row">{{numero}}</th>
-            <td><a href="{{path("stage",{id:stage.id})}}">{{ stage.titre }}</a></td>
-            <td>{{ stage.descMissions }}</td>
-            <td>{{ stage.emailContact }}</td>
-        </tr>
-  
-        {% set numero = numero + 1 %}
-        
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock %}

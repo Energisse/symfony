@@ -30,7 +30,7 @@ class Stage
     private $descMissions;
 
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=50)
      */
     private $emailContact;
 
@@ -38,7 +38,7 @@ class Stage
      * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="stages")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $entrepriseCode;
+    private $entreprise;
 
     /**
      * @ORM\ManyToMany(targetEntity=Formation::class, inversedBy="stages")
@@ -91,14 +91,14 @@ class Stage
         return $this;
     }
 
-    public function getEntrepriseCode(): ?Entreprise
+    public function getEntreprise(): ?Entreprise
     {
-        return $this->entrepriseCode;
+        return $this->entreprise;
     }
 
-    public function setEntrepriseCode(?Entreprise $entrepriseCode): self
+    public function setEntreprise(?Entreprise $entreprise): self
     {
-        $this->entrepriseCode = $entrepriseCode;
+        $this->entreprise = $entreprise;
 
         return $this;
     }

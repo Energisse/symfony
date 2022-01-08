@@ -1,0 +1,27 @@
+
+<h1>{{ titre | default("Liste des stage")}}</h1>
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set numero = 1 %}
+        {% for stage in stages %}
+        
+        <tr>
+            <th scope="row">{{numero}}</th>
+            <td><a href="{{path("stage",{id:stage.id})}}">{{ stage.titre }}</a></td>
+            <td>{{ stage.descMissions }}</td>
+            <td>{{ stage.emailContact }}</td>
+        </tr>
+  
+        {% set numero = numero + 1 %}
+        
+        {% endfor %}
+    </tbody>
+</table>

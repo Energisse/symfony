@@ -1,19 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Entreprises{% endblock %}
+{% block title %}Entreprise{% endblock %}
 
 {% block body %}
-<h1>Liste des stage de {{entreprise.nom}}</h1>
 
-{% set numero = 1 %}
-<table class="table">
-    {% for stage in entreprise.stages %}
-    {{stage.descMissions}}
-        {% for formation in stage.formations %}
-        {{formation.nomLong}}
-        {% endfor %}
-    {% endfor %}
-</table>
-   
+{% include 'stages.html.twig' with {'stages': entreprise.stages,'titre' : "iste des stages de l'entreprise : "~entreprise.nom} %}
 
 {% endblock %}

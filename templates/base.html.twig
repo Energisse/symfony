@@ -23,13 +23,26 @@
 </head>
 
 <body>
-    <h1>
-        ProStage
-    </h1>
-    <div id="filtre">
-        <a href="{{path('entreprises')}}">Filtrer par entreprises</a>
-        <a href="{{path('formations')}}">Filtrer par formations</a>
-    </div>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav justify-content-center">
+						<li class="nav-item active">
+							 <a class="navbar-brand" href="{{ path ('stages') }}"> ProStages <span class="sr-only"></span></a>
+						</li>
+                        <li class="nav-item active">
+                            <a class="navbar-brand" href="{{ path ('formations') }}"> Trier par Formation <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="navbar-brand" href="{{ path ('entreprises') }}"> Trier par Entreprise <span class="sr-only"></span></a>
+                        </li>
+                    </ul>
+				</div>
+                
+			</nav>
+    </header>
+
     {% block body %}{% endblock %}
 </body>
 

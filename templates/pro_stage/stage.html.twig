@@ -4,15 +4,22 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+  #listeFormation{
+    padding:15px;
+
+  }
 </style>
 
 <div class="example-wrapper">
-  <p>{{stage.titre}}</p>
-  <p>{{stage.descMissions}}</p>
-  <p>{{stage.emailContact}}</p>
-
-    
+  <p>Titre : {{stage.titre}}</p>
+  <p>Description : {{stage.descMissions}}</p>
+  <p>Eamil de contact : {{stage.emailContact}}</p>
+  <p>Proposé par : {{stage.entreprise.nom}}</p>
+  <p>Formations :</p>
+  <div id="listeFormation">
+  {% for formation in stage.formations %}
+    <p>{{formation.nomCourt}}</p>
+  {% endfor %}
+  </div>
 </div>
 {% endblock %}
