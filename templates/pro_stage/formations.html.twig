@@ -25,10 +25,10 @@
             <td>{{ formation.nomCourt }}</td>
             <td>
                 {% if formation.stages | length == 1 %}
-                    <a href="{{ path('stages-formation', {id: formation.id}) }}">voir le stage</a>
+                    <a href="{{ path('stages-formation', {nom: formation.nomlong}) }}">voir le stage</a>
                 {% endif %}
                 {% if formation.stages | length > 1 %}
-                    <a href="{{ path('stages-formation', {id: formation.id}) }}">voir les {{ formation.stages | length }} stages</a>
+                    <a href="{{ path('stages-formation', {nom: formation.nomlong}) }}">voir les {{ formation.stages | length }} stages</a>
                 {% endif %}
              
             </td>

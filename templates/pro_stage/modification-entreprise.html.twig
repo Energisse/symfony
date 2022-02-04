@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout entreprises{% endblock %}
+
+{% block body %}
+<style>
+#form{
+    margin:10%;
+}
+
+
+</style>
+<div id="form">
+    <h1>Modification</h1>
+    {{form_start(formulaire)}}
+    {{form_row(formulaire.nom)}}
+    {{form_row(formulaire.adresse)}}
+    {{form_row(formulaire.activite)}}
+    {{form_row(formulaire.URLsite)}}
+    <button type="submit" class="btn btn-dark">Modifier</button>
+    {{form_end(formulaire)}}
+
+</div>
+
+
+
+
+{% endblock %}
