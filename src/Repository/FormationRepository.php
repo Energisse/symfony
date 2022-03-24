@@ -19,18 +19,7 @@ class FormationRepository extends ServiceEntityRepository
         parent::__construct($registry, Formation::class);
     }
 
-    public function findAllStagesByFormation($nom){
-        $gesionnaireEntity = $this->getEntityManager();
-
-        return $gesionnaireEntity->createQuery('SELECT f,s
-                                                FROM App\Entity\Formation f 
-                                                JOIN f.stages s
-                                                WHERE f.nomLong = :nomFormation')
-                                    ->setParameters(array(
-                                        'nomFormation' => $nom
-                                    ))
-                                    ->getOneOrNullResult();
-    }
+    
 
     // /**
     //  * @return Formation[] Returns an array of Formation objects

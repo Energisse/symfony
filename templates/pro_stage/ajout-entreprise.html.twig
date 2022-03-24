@@ -12,7 +12,8 @@
 </style>
 <div id="form">
     <h1>Ajout</h1>
-    {{form_start(formulaire)}}
+    {# {{form_start(formulaire,{'attr': {'novalidate': 'novalidate'}})}} #}
+     {{form_start(formulaire)}} 
     {{form_row(formulaire.nom)}}
     {{form_row(formulaire.adresse)}}
     {{form_row(formulaire.activite)}}

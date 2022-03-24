@@ -19,16 +19,6 @@ class EntrepriseRepository extends ServiceEntityRepository
         parent::__construct($registry, Entreprise::class);
     }   
 
-    public function findAllStagesByEntreprise($nom){
-        return $this->createQueryBuilder('e')
-                    ->select('e,s')
-                    ->join('e.stages','s')
-                    ->andWhere('e.nom = :nomEntreprise')
-                    ->setParameter('nomEntreprise', $nom)
-                    ->getQuery()
-                    ->getOneOrNullResult();
-    }
-
     // /**
     //  * @return Entreprise[] Returns an array of Entreprise objects
     //  */

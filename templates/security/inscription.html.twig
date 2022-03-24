@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post">
+    {{form_start(formulaire)}} 
+    {{form_row(formulaire.nom)}}
+    {{form_row(formulaire.prenom)}}
+    {{form_row(formulaire.email)}}
+    {{form_row(formulaire.password)}}
+    <button type="submit" class="btn btn-dark">S'inscrire</button>
+    {{form_end(formulaire)}}
+
+{% endblock %}

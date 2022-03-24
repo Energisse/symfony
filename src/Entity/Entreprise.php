@@ -6,6 +6,7 @@ use App\Repository\EntrepriseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EntrepriseRepository::class)
@@ -20,21 +21,30 @@ class Entreprise
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=50)
      */
     private $activite;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Regex(pattern="#rue|avenue|boulevard|imapsse|allée|phase|route|voie#",message="Le type de route\voie semble incorrect")
+     * @Assert\Regex(pattern="# [0-9]{5} #",message="Le code postal semble incorrect")
+     * @Assert\Regex(pattern="#^[1-9][0-9]{0,2} ?(bis)?#",message="Le numero de rue semble incorrect")
      * @ORM\Column(type="string", length=150)
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(min=4,minMessage="Le nom de l'entreprise doit faire au moins 4 catactères")
      */
     private $nom;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Url
      * @ORM\Column(type="string", length=150)
      */
     private $URLsite;
@@ -130,5 +140,10 @@ class Entreprise
         }
 
         return $this;
+    }
+
+
+    public function __toString(){
+        return $this->getNom();
     }
 }

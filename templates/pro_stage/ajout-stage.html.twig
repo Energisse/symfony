@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout stage{% endblock %}
+
+{% block body %}
+<style>
+#form{
+    margin:10%;
+}
+#conteneur-entreprise-formations{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#conteneur-entreprise{
+    flex-grow: 1;   
+}
+
+#conteneur-formations{
+    flex-grow: 1;   
+    display: flex;
+    position: relative;
+    padding-left: 15px;
+}
+
+#conteneur-formation-list{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+#conteneur-formation-list:hover{
+    overflow-y: scroll;
+}
+
+</style>
+<div id="form">
+    <h1>Ajout</h1>
+    {# {{form_start(formulaire,{'attr': {'novalidate': 'novalidate'}})}} #}
+    {{form_start(formulaire)}} 
+    {{form_row(formulaire.titre)}}
+    {{form_row(formulaire.descMissions)}}
+    {{form_row(formulaire.emailContact)}}
+
+    <div id="conteneur-entreprise-formations">
+        <div id="conteneur-entreprise">
+            <h2>Entreprise</h2>
+
+            {{form_row(formulaire.entreprise.nom)}}
+            {{form_row(formulaire.entreprise.adresse)}}
+            {{form_row(formulaire.entreprise.activite)}}
+            {{form_row(formulaire.entreprise.URLsite)}}
+        </div>
+        <div id="conteneur-formations">
+            <div id="conteneur-formation-list">
+            <h2>Formations</h2>
+
+                {{form_row(formulaire.formations)}}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark">Ajouter</button>
+    {{form_end(formulaire)}}
+
+</div>
+
+
+
+{% endblock %}

@@ -4,6 +4,6 @@
 
 {% block body %}
 
-{% include 'stages.html.twig' with {'stages': entreprise.stages,'titre' : "Liste des stages de l'entreprise : "~entreprise.nom} %}
+{% include 'pro_stage/tableau-stages.html.twig' with {'stages': stages,'titre' : "Liste des stages de l'entreprise : "~nomEntreprise} %}
 
 {% endblock %}

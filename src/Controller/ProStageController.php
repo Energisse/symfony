@@ -8,9 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EntrepriseRepository;
-use App\Entity\Entreprise;
-use App\Repository\FormationRepository;
 use App\Repository\StageRepository;
+use App\Entity\Entreprise;
+use App\Entity\Stage;
+use App\Repository\FormationRepository; 
+use App\Form\EntrepriseType;
+use App\Form\StageType;
+
 class ProStageController extends AbstractController
 {
     /**
@@ -25,10 +29,13 @@ class ProStageController extends AbstractController
     /**
      * @Route("/entreprise/{nom}", name="stages-entreprise")
      */
-    public function afficherStagesEntreprise(EntrepriseRepository $repositoryEntreprise,$nom): Response
+    public function afficherStagesEntreprise(StageRepository $repositoryStage,$nom): Response
     {
-        $entreprise = $repositoryEntreprise->findAllStagesByEntreprise($nom);
-        return $this->render('pro_stage/stages-entreprise.html.twig',["entreprise"=>$entreprise]);
+        $stages = $repositoryStage->findAllStagesByEntreprise($nom);
+        return $this->render('pro_stage/stages-entreprise.html.twig',[
+                                                                "stages"=>$stages,
+                                                                "nomEntreprise"=>$nom
+                                                            ]);
     }
 
     /**
@@ -44,11 +51,13 @@ class ProStageController extends AbstractController
     /**
      * @Route("/formation/{nom}", name="stages-formation")
      */
-    public function afficherStagesFormation(FormationRepository $repositoryFormation,$nom): Response
+    public function afficherStagesFormation(StageRepository $repositoryStage,$nom): Response
     {
-        $formation = $repositoryFormation->findAllStagesByFormation($nom);
-
-        return $this->render('pro_stage/stages-formation.html.twig',["formation"=>$formation]);
+        $stages = $repositoryStage->findAllStagesByFormation($nom);
+        return $this->render('pro_stage/stages-formation.html.twig',[
+                                                                "stages"=>$stages,
+                                                                "nomFormation"=>$nom
+                                                            ]);
     }
 
     /**
@@ -80,14 +89,10 @@ class ProStageController extends AbstractController
     {   
         $entreprise = new Entreprise();
 
-        $formulaire = $this->createFormBuilder($entreprise)
-                           ->add("activite")
-                           ->add("adresse")
-                           ->add("nom")
-                           ->add("URLsite")
-                           ->getForm();
+        $formulaire = $this->createForm(EntrepriseType::class,$entreprise);
 
         $formulaire->handleRequest($request);
+
         if($formulaire->isSubmitted() && $formulaire->isValid()){
             $entreprise = $formulaire->getData();
             
@@ -110,12 +115,7 @@ class ProStageController extends AbstractController
     {   
         $entreprise = $repositoryEntreprise->find($id);
 
-        $formulaire = $this->createFormBuilder($entreprise)
-                           ->add("activite")
-                           ->add("adresse")
-                           ->add("nom")
-                           ->add("URLsite")
-                           ->getForm();
+        $formulaire = $this->createForm(EntrepriseType::class,$entreprise);
 
         $formulaire->handleRequest($request);
         if($formulaire->isSubmitted() && $formulaire->isValid()){
@@ -131,4 +131,33 @@ class ProStageController extends AbstractController
             'formulaire' => $formulaire->createView(),
         ]);
     }
+
+    /**
+     * @Route("/ajout-stage", name="ajout-stage")
+     */
+    public function afficherFormAjoutStage(Request $request,EntityManagerInterface $entityManager): Response
+    {   
+        $stage = new Stage();
+
+        $formulaire = $this->createForm(StageType::class,$stage);
+
+        $formulaire->handleRequest($request);
+        if($formulaire->isSubmitted() && $formulaire->isValid()){
+            $stage = $formulaire->getData();
+            
+            $entityManager->persist($stage);
+            $entityManager->persist($stage->getEntreprise());
+            $entityManager->flush();
+            return $this->redirectToRoute("stages");
+        }
+
+
+        return $this->render('pro_stage/ajout-stage.html.twig', [
+            'formulaire' => $formulaire->createView(),
+        ]);
+    }
+
+
+
+    
 }

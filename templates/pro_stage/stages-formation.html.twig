@@ -4,6 +4,6 @@
 
 {% block body %}
 
-{% include 'stages.html.twig' with {'stages': formation.stages,'titre' : "Liste des stages de la formation : "~formation.nomCourt} %}
+{% include 'pro_stage/tableau-stages.html.twig' with {'stages': stages,'titre' : "Liste des stages de la formation : "~nomFormation} %}
 
 {% endblock %}

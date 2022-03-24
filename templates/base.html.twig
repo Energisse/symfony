@@ -40,7 +40,21 @@
                         <li class="nav-item active">
                             <a class="navbar-brand" href="{{ path ('ajout-entreprise') }}"> Ajouter une Entreprise <span class="sr-only"></span></a>
                         </li>
-                        
+                        <li class="nav-item active">
+                            <a class="navbar-brand" href="{{ path ('ajout-stage') }}"> Ajouter un Stage <span class="sr-only"></span></a>
+                        </li>
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item active">
+                                <a class="navbar-brand" href="{{ path ('app_logout') }}"> Deconnexion <span class="sr-only"></span></a>
+                            </li>
+                        {% else %}  
+                            <li class="nav-item active">
+                                <a class="navbar-brand" href="{{ path ('app_login') }}"> Connexion <span class="sr-only"></span></a>
+                            </li> 
+                            <li class="nav-item active">
+                                <a class="navbar-brand" href="{{ path ('app_inscription') }}"> Inscription <span class="sr-only"></span></a>
+                            </li>
+                        {% endif%}
                     </ul>
 				</div>
                 
